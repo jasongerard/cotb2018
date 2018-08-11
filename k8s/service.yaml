@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cotbhttp
+spec:
+  type: LoadBalancer
+  selector:
+    app: cotb2018
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

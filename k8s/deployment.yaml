@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cotb2018
+  labels:
+    app: cotb2018
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        app: cotb2018
+  template:
+    metadata:
+      labels:
+        app: cotb2018
+    spec:
+      containers:
+      - name: cotb2018
+        image: cotb2018:1.0.0
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3
+          failureThreshold: 4
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3
